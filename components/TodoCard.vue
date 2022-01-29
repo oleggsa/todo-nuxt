@@ -8,18 +8,19 @@
 
 <script>
     export default {
-        
+
     }
 </script>
 
 <style scoped>
     .todos__card {
-        min-width: 200px;
+        width: 250px;
         min-height: 200px;
         margin: 20px;
         box-shadow: 3px 3px 5px black;
         background: blanchedalmond;
         padding: 10px;
         border-radius: 10px;
+        position: relative;
     }
 </style>
