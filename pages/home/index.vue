@@ -2,7 +2,20 @@
     <div>
         <h1>Home Todos</h1>
         <div class="todos__wrapper">
-            <TodoCard v-for="todo in 7" :key='todo'>{{todo}}</TodoCard>
+            
+            <TodoCard 
+            v-for="todo in this.homeList" 
+            :key='todo.id'
+            >
+            <button 
+                type="button" 
+                class="btn-close todo__delete" 
+                aria-label="Close"
+                @click="deleteItem(todo)"
+            ></button>
+                <h3>{{todo.title}}</h3>
+                <p>{{todo.description}}</p>
+            </TodoCard>
         </div>
     </div>
 </template>
@@ -10,8 +23,21 @@
 <script>
 import TodoCard from '@/components/Todocard'
     export default {
+        data() {
+            return {
+                homeList: []
+            }
+        },
         components: {
             TodoCard
+        },
+        mounted() {
+            this.homeList = this.$store.state.home;
+        },
+        methods: {
+            deleteItem(todo) {
+                this.homeList = this.homeList.filter(el => el.id !== todo.id)
+            }
         }
     }
 </script>
@@ -20,6 +46,14 @@ import TodoCard from '@/components/Todocard'
     .todos__wrapper {
         display: flex;
         flex-wrap: wrap;
-        justify-content: left;
+        justify-content: center;
+    }
+    h3, p {
+        word-wrap: break-word;
+    }
+    .todo__delete {
+        position: absolute;
+        right: 13px;
+        top: 10px;
     }
 </style>
